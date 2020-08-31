@@ -19,6 +19,7 @@ import { scrollTo } from '@/utils/scroll-to'
 
 export default {
   name: 'Pagination',
+  // 定义变量属性
   props: {
     total: {
       required: true,
@@ -55,6 +56,8 @@ export default {
       default: false
     }
   },
+
+  // 定义变量set/get方法
   computed: {
     currentPage: {
       get() {
@@ -73,13 +76,16 @@ export default {
       }
     }
   },
+
   methods: {
+    // 页面大小和状态变化时似乎没有重新请求数据
     handleSizeChange(val) {
       this.$emit('pagination', { page: this.currentPage, limit: val })
       if (this.autoScroll) {
         scrollTo(0, 800)
       }
     },
+
     handleCurrentChange(val) {
       this.$emit('pagination', { page: val, limit: this.pageSize })
       if (this.autoScroll) {

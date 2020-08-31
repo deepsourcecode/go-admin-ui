@@ -27,6 +27,7 @@
               />
             </div>
           </el-col>
+
           <!--用户数据-->
           <el-col :span="20" :xs="24">
             <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
@@ -72,6 +73,7 @@
               </el-form-item>
             </el-form>
 
+            <!-- 新增、删除、更新按钮-->
             <el-row :gutter="10" class="mb8">
               <el-col :span="1.5">
                 <el-button
@@ -104,6 +106,7 @@
               </el-col>
             </el-row>
 
+            <!-- 表格显示用户数据 -->
             <el-table
               v-loading="loading"
               :data="userList"
@@ -173,6 +176,7 @@
           </el-col>
         </el-row>
       </el-card>
+
       <!-- 添加或修改参数配置对话框 -->
       <el-dialog :title="title" :visible.sync="open" width="600px">
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
@@ -274,6 +278,7 @@
           <el-button @click="cancel">取 消</el-button>
         </div>
       </el-dialog>
+
       <!-- 用户导入对话框 -->
       <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px">
         <el-upload
@@ -373,7 +378,7 @@ export default {
         // 上传的地址
         url: process.env.VUE_APP_BASE_API + '/system/user/importData'
       },
-      // 查询参数
+      // 分页查询参数
       queryParams: {
         pageIndex: 1,
         pageSize: 10,
@@ -415,12 +420,14 @@ export default {
       }
     }
   },
+
   watch: {
     // 根据名称筛选部门树
     deptName(val) {
       this.$refs.tree.filter(val)
     }
   },
+
   created() {
     this.getList()
     this.getTreeselect()
@@ -434,6 +441,7 @@ export default {
       this.initPassword = response.msg
     })
   },
+
   methods: {
     /** 查询用户列表 */
     getList() {
